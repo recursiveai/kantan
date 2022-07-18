@@ -11,7 +11,7 @@ def run(args=None):
         raise ValueError("This script is only for use with Python >= 3.3")
 
     parser = argparse.ArgumentParser(
-        prog=__name__,
+        prog="kantan",
         description="Creates virtual Python "
         "environments in one or "
         "more target "

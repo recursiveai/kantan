@@ -23,7 +23,10 @@ namespaces = true
 
 [tool.setuptools.dynamic]
 dependencies = {file = "requirements.txt"}
-optional-dependencies = {dev = {file = ["requirements-dev.txt"]}, pub = {file = ["requirements-pub.txt"]}}
+
+[tool.setuptools.dynamic.optional-dependencies]
+dev = {file = ["requirements-dev.txt"]}
+pub = {file = ["requirements-pub.txt"]}
 
 [tool.pytest.ini_options]
 addopts = "-ra -q -vv --cov=kantan"
