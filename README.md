@@ -18,7 +18,7 @@ Example `configuration.json`:
 
 ```
 {
-    "requirements: [ // Requirements to be installed using `pip install`
+    "requirements": [ // Requirements to be installed using `pip install`
         numpy=1.2.3
     ],
     "include_files" : [ // Files to be copied to `env_dir`
@@ -30,7 +30,7 @@ Example `configuration.json`:
 Then as with `venv` a virtual environment can be created:
 
 ```
-$ python -m kantan .venv [--config-name CONFIG_NAME=default]
+$ kantan [--config-name CONFIG_NAME=default] .venv
 ```
 
 ## Development
@@ -40,7 +40,7 @@ $ python -m kantan .venv [--config-name CONFIG_NAME=default]
 Create and load a virtual environement.
 
 ```
-python -m kantan .venv
+python -m venv .venv
 source .venv/bin/activate
 ```
 
