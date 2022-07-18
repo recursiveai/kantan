@@ -40,64 +40,22 @@ $ python -m kantan .venv [--config-name CONFIG_NAME=default]
 Create and load a virtual environement.
 
 ```
-$ python -m venv .venv
-$ source .venv/bin/activate
+python -m kantan .venv
+source .venv/bin/activate
 ```
 
-Install dependencies.
+### Install
+
+Install all dependencies in editable mode.
 
 ```
-$ pip install -e '.[dev,pub]'
+make install
 ```
 
-### Run tests, linter, bandit, black and isort
+### Misc
 
-Running Pytest on the codebase.
-
-```
-$ python -m pytest .
-```
-
-Running Pylint on the codebase.
+Check what other shortcuts are available.
 
 ```
-$ python -m pylint src
-```
-
-Running Bandit on the codebase.
-
-```
-$ python -m bandit -c pyproject.toml -r src
-```
-
-Running Black formatter on the codebase.
-
-```
-$ python -m black src
-```
-
-Running Isort formatter on the codebase.
-
-```
-$ python -m isort src
-```
-
-### Publish package
-
-Build package.
-
-```
-$ python -m build .
-```
-
-Verify package.
-
-```
-$ python -m twine check dist/*
-```
-
-Upload package to a `pypi`.
-
-```
-$ python -m twine upload dist/*
+make help
 ```

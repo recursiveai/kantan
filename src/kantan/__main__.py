@@ -1,4 +1,4 @@
-from kantan import raw_main
+from kantan.cmd import main
 
 if __name__ == "__main__":
-    raw_main()
+    main()

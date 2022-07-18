@@ -4,15 +4,21 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "kantan"
-version = "0.1.0"
+version = "0.2.0"
 description = "Configurable venv extension"
 readme = "README.md"
 requires-python=">=3.6,<4.0.0"
 dynamic = ["dependencies", "optional-dependencies"]
 
+[project.urls]
+homepage = "https://github.com/miguelnmiranda/kantan"
+
+[project.scripts]
+kantan = "kantan.cli:main"
+
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["kantan"]
+include = ["kantan*"]
 namespaces = true
 
 [tool.setuptools.dynamic]
