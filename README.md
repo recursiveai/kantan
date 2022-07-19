@@ -27,10 +27,10 @@ Example `configuration.json`:
 }
 ```
 
-Then as with `venv` a virtual environment can be created:
+Then check how to use kantan in from commandline.
 
 ```
-$ kantan [--config-name CONFIG_NAME=default] .venv
+$ kantan -h
 ```
 
 ## Development
