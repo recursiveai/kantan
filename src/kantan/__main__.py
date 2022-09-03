@@ -1,4 +1,4 @@
-from kantan.cmd import main
+from kantan.cli import main
 
 if __name__ == "__main__":
     main()

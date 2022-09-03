@@ -8,7 +8,7 @@ from kantan import builder
 
 def run(args=None):
     if sys.version_info < (3, 3) or not hasattr(sys, "base_prefix"):
-        raise ValueError("This script is only for use with Python >= 3.3")
+        raise ValueError("This script is only for use with Python >= 3.9")
 
     parser = argparse.ArgumentParser(
         prog="kantan",
@@ -101,7 +101,7 @@ def run(args=None):
     parser.add_argument(
         "--config-name",
         default="default",
-        help="Target configuration to load from `~/.kantan'.",
+        help="Target configuration to load from `$HOME/.kantan'.",
     )
     options = parser.parse_args(args)
     if options.upgrade and options.clear:
@@ -126,7 +126,7 @@ def main():
     try:
         run()
         return_code = 0
-    except Exception as exception:
+    except Exception as exception:  # pylint: disable=W0703
         print(f"Error: {exception}", file=sys.stderr)
     sys.exit(return_code)
 

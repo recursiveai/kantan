@@ -4,10 +4,10 @@ Configurable venv extension.
 
 ## How to use?
 
-Kantan assumes the existence of a folder `~/.kantan` containing available configuration.
+Kantan assumes the existence of a folder `$HOME/.kantan` containing available configuration.
 
 ```
-/~
+/$HOME
     /.kantan
         /default
             configuration.json
@@ -18,8 +18,8 @@ Example `configuration.json`:
 
 ```
 {
-    "requirements": [ // Requirements to be installed using `pip install`
-        numpy=1.2.3
+    "requirements": [ // Requirements to be installed on the new environment using `pip install`
+        "numpy=1.2.3"
     ],
     "include_files" : [ // Files to be copied to `env_dir`
         "file_to_copy"
@@ -27,7 +27,7 @@ Example `configuration.json`:
 }
 ```
 
-Then check how to use kantan in from commandline.
+Then check how to use kantan from commandline.
 
 ```
 $ kantan -h
@@ -59,3 +59,11 @@ Check what other shortcuts are available.
 ```
 make help
 ```
+
+## Areas of improvement
+
+- Add/Test Support for older/newer Python versions.
+- Json schema for `configuration.json` validation.
+- Make configuration extendable.
+- Improve coverage of builder and extensions.
+- Improve error handling and messages
