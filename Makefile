@@ -4,13 +4,16 @@ SHELL := /bin/zsh
 install: ## Install all dependencies in editable mode
 	pip install -e '.[dev,pub]'
 
-check: pytest pylint bandit ## Run pytest, pylint and bandit
+check: pytest pylint pyright bandit ## Run pytest, pylint, pyright and bandit
 
 pytest: ## Execute unit tests with pytest
-	python -m pytest .
+	python -m pytest -s .
 
 pylint: ## Check code smells with pylint
 	python -m pylint --exit-zero src
+
+pyright: ## Check type annotations
+	python -m pyright
 
 bandit: ## Check securty smells with bandit
 	python -m bandit -c pyproject.toml -r src

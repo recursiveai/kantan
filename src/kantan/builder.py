@@ -3,6 +3,7 @@ import logging
 import os
 import shutil
 import subprocess
+import sys
 import venv
 from types import SimpleNamespace
 
@@ -21,30 +22,40 @@ def create(  # pylint: disable=R0913
     config_name="default",
 ):
     """Create a virtual environment in a directory."""
-    builder = KantanEnvBuilder(
-        system_site_packages=system_site_packages,
-        clear=clear,
-        symlinks=symlinks,
-        upgrade=upgrade,
-        with_pip=with_pip,
-        prompt=prompt,
-        upgrade_deps=upgrade_deps,
-        config_name=config_name,
-    )
+    if sys.version_info[:2] < (3, 9):
+        builder = KantanEnvBuilder(
+            system_site_packages=system_site_packages,
+            clear=clear,
+            symlinks=symlinks,
+            upgrade=upgrade,
+            with_pip=with_pip,
+            prompt=prompt,
+            config_name=config_name,
+        )
+    else:
+        builder = KantanEnvBuilder(
+            system_site_packages=system_site_packages,
+            clear=clear,
+            symlinks=symlinks,
+            upgrade=upgrade,
+            with_pip=with_pip,
+            prompt=prompt,
+            upgrade_deps=upgrade_deps,
+            config_name=config_name,
+        )
+
     builder.create(env_dir)
 
 
 class KantanEnvBuilder(venv.EnvBuilder):
 
-    KANTAN_CONFIG_DIR = ".kantan"
+    KANTAN_CONFIG_DIR = os.path.join("~", ".kantan")
     KANTAN_CONFIG_FILE = "configuration.json"
 
     def __init__(self, *args, **kwargs):
         config_name = kwargs.pop("config_name", "default")
-        user_home = os.path.expanduser("~")
-        self.config_dir_path = os.path.join(
-            user_home, self.KANTAN_CONFIG_DIR, config_name
-        )
+        kantan_home = os.path.expanduser(self.KANTAN_CONFIG_DIR)
+        self.config_dir_path = os.path.join(kantan_home, config_name)
 
         super().__init__(*args, **kwargs)
 
@@ -78,7 +89,7 @@ class KantanEnvBuilder(venv.EnvBuilder):
     def _install_dependency(context: SimpleNamespace, package_ref: str) -> None:
         logger.debug("Installing %s package in %s", package_ref, context.bin_path)
 
-        cmd = [context.env_exec_cmd, "-m", "pip", "install"]
+        cmd = [context.env_exe, "-m", "pip", "install"]
         cmd.append(package_ref)
         subprocess.check_call(cmd)
 

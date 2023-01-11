@@ -7,8 +7,12 @@ from kantan import builder
 
 
 def run(args=None):
-    if sys.version_info < (3, 3) or not hasattr(sys, "base_prefix"):
-        raise ValueError("This script is only for use with Python >= 3.9")
+    if sys.version_info < (3, 7) or not hasattr(sys, "base_prefix"):
+        raise ValueError("This script is only for use with Python >= 3.7")
+
+    if sys.version_info[:2] < (3, 9):
+        if not hasattr(venv, "CORE_VENV_DEPS"):
+            venv.CORE_VENV_DEPS = ('pip', 'setuptools') # type: ignore
 
     parser = argparse.ArgumentParser(
         prog="kantan",
@@ -96,7 +100,7 @@ def run(args=None):
         default=False,
         action="store_true",
         dest="upgrade_deps",
-        help=f"Upgrade core dependencies: {venv.CORE_VENV_DEPS} to the latest version in PyPI.",
+        help=f"Upgrade core dependencies: {venv.CORE_VENV_DEPS} to the latest version in PyPI.", # type: ignore
     )
     parser.add_argument(
         "--config-name",

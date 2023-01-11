@@ -1,0 +1,4 @@
+{
+ "requirements": ["kantan"],
+ "include_files": ["pip.conf"]
+}
